@@ -124,12 +124,15 @@ const App = () => {
         body: JSON.stringify(data),
       });
 
+      console.log('Response status:', response.status, 'ok:', response.ok);
+
       if (response.ok) {
         setFormStatus({type: 'success', message: 'Message sent successfully!'});
       } else {
         setFormStatus({type: 'error', message: 'Failed to send message. Please try again.'});
       }
     } catch (error) {
+      console.error('Fetch error:', error);
       setFormStatus({type: 'error', message: 'An error occurred. Please try again.'});
     }
   };
@@ -580,7 +583,7 @@ const App = () => {
                 {/* MESSAGE FIELD */}
                 <div className="group space-y-2">
                   <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest flex items-center gap-2 group-focus-within:text-blue-500 transition-colors">
-                    <Terminal className="w-3 h-3" /> Transmit Log / Message
+                    <Terminal className="w-3 h-3" />  Message
                   </label>
                   <textarea 
                     rows={4}

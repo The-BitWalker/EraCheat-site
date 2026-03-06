@@ -5,11 +5,15 @@ export async function POST(request: NextRequest) {
   try {
     const { name, email, category, message } = await request.json();
 
+    console.log('Received contact data:', { name, email, category, message });
+
     if (!name || !email || !category || !message) {
+      console.log('Missing fields');
       return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
     }
 
     // Create table if not exists
+    console.log('Creating table if not exists');
     await turso.execute(`
       CREATE TABLE IF NOT EXISTS contacts (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -22,10 +26,13 @@ export async function POST(request: NextRequest) {
     `);
 
     // Insert the contact
+    console.log('Inserting contact');
     const result = await turso.execute({
       sql: 'INSERT INTO contacts (name, email, category, message) VALUES (?, ?, ?, ?)',
       args: [name, email, category, message],
     });
+
+    console.log('Insert result:', result);
 
     return NextResponse.json({ success: true, id: result.lastInsertRowid });
   } catch (error) {
