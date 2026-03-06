@@ -33,6 +33,7 @@ const App = () => {
   const [progress, setProgress] = useState(0);
   const [showContact, setShowContact] = useState(false);
   const [formStatus, setFormStatus] = useState<{type: 'idle' | 'loading' | 'success' | 'error', message?: string}>({type: 'idle'});
+  const [showMore, setShowMore] = useState(false);
   const currentYear = new Date().getFullYear();
 
   const ROTATION_SPEED = 20000; // Increased to 20 seconds per feature
@@ -420,6 +421,23 @@ const App = () => {
               <p className="text-slate-400 text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed mb-12 border-l-2 border-white/5 pl-6 italic">
                 Stop losing to silver scrubs. Get the #1 undetected cheat for Counter-Strike. See through walls, hit every headshot, and rank up instantly with our humanized legit settings.
               </p>
+
+              {showMore && (
+                <p className="text-slate-400 text-base max-w-xl mx-auto lg:mx-0 leading-relaxed mb-6 border-l-2 border-white/5 pl-6 italic animate-in fade-in slide-in-from-bottom-8 scale-in-90 duration-700 ease-out">
+                  Imagine dominating every match without the endless grind. Our cheat isn't just a tool, it's your ticket to becoming the player you've always wanted to be. See enemies through walls before they even peek, hit headshots that make your teammates question if you're hacking (you're not, just a really good gaming chair), and climb from Silver scrub to Global Elite faster than you can say "ACE!"
+                  <br /><br />
+                  And here's the kicker: it's completely free. We're not some greedy corp trying to milk you dry. We're just a squad of world-class programmers who got sick of watching bad players win. Why charge when we can prove our superiority by creating the most undetectable, powerful cheat on the market? Download now, level up, and remember, telling your friends is optional, but encouraged.
+                </p>
+              )}
+
+              <button 
+                onClick={() => setShowMore(!showMore)}
+                className="flex items-center gap-2 text-slate-500 hover:text-blue-400 transition-colors uppercase font-black text-xs tracking-widest mb-8 group"
+              >
+                <span className="relative flex items-center gap-2">
+                  {showMore ? 'Show Less' : 'Read More'} <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${showMore ? 'rotate-180' : ''}`} />
+                </span>
+              </button>
 
               <div className="flex flex-col items-center lg:items-start gap-4 mb-8">
                 <button 
